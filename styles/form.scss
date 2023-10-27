@@ -1,0 +1,88 @@
+@use 'variables' as v;
+
+.form-container {
+  max-width:50vw;
+  min-width: 300px;
+  // margin: 50px auto;
+  background-color: white;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+
+  // @media (max-width: 600px) {
+  //   max-width: 90%;
+  //   margin: 20px auto;
+  //   padding: 15px;
+  // }
+}
+.resource-info{
+  width: 70%;
+}
+
+.title-header{
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.add-new-container {
+  margin: 0;
+  width:100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 0;
+
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white;
+    appearance: none;
+    cursor: pointer;
+    option.placeholder {
+      color: #999;
+    }
+  }
+
+  input,
+  textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .resource-button {
+    padding: 10px;
+    background-color:  #4c5265;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-bottom: 40px;
+
+    &:hover {
+      background-color:  v.$teal;
+    }
+  }
+
+  .button-area {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+  }
+}

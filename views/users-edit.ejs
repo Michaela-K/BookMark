@@ -1,0 +1,78 @@
+<%- include('partials/_header.ejs') %>
+<main class="form-container">
+  <div class="resource-info">
+    <h1 class="title-header">Edit Profile</h1>
+    <form id="userEditForm" action="/users/<%= userId %>" method="POST">
+      <label class="profile-header" for="username">Username:</label>
+      <input
+        class="resource-profile-field"
+        type="text"
+        id="username"
+        name="handle"
+        value="<%= user.handle %>"
+        required
+      /><br />
+      <label class="profile-header" for="email">Email:</label>
+      <input
+        class="resource-profile-field"
+        type="email"
+        id="email"
+        name="email"
+        value="<%= user.email %>"
+        required
+      /><br />
+      <label class="profile-header" for="password">Password:</label>
+      <input
+        class="resource-profile-field"
+        type="password"
+        id="password"
+        name="password"
+        value="<%= user.password %>"
+        required
+      /><br />
+
+      <label class="profile-header" for="profile_image_url"
+        >Profile Image URL:</label
+      >
+      <input
+        class="resource-profile-field"
+        type="text"
+        id="profile_image_url"
+        name="profile_picture"
+        value="<%= user.profile_picture %>"
+        required
+      /><br />
+      <label class="profile-header" for="first_name">First Name:</label>
+      <input
+        class="resource-profile-field"
+        type="text"
+        id="first_name"
+        name="first_name"
+        value="<%= user.first_name %>"
+        required
+      /><br />
+      <label class="profile-header" for="last_name">Last Name:</label>
+      <input
+        class="resource-profile-field"
+        type="text"
+        id="last_name"
+        name="last_name"
+        value="<%= user.last_name %>"
+        required
+      /><br />
+      <label class="profile-header" for="bio">About Me:</label>
+      <input
+        class="resource-profile-field"
+        type="text"
+        id="bio"
+        name="bio"
+        value="<%= user.bio %>"
+      /><br />
+      <div class="button-area">
+        <button class="edit-profile-button" type="submit">
+          Update Profile
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

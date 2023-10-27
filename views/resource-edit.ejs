@@ -1,0 +1,70 @@
+<%- include('partials/_header.ejs') %>
+<main class="form-container">
+  <div class="resource-info">
+    <h1 class="title-header">Edit Resource</h1>
+    <div class="edit-resource-container"></div>
+    <form
+      id="resourceEditForm"
+      action="/resources/<%= resourceId %>"
+      method="POST"
+    >
+      <label class="resource-header" for="title"></label>
+      <input type="hidden" name="owner_id" value="<%= userId %>" />
+      <label class="resource-header" for="title">Title:</label>
+      <input
+        class="resource-field"
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Resource Name"
+        required
+        value="<%= resource.title %>"
+      /><br />
+      <label class="resource-header" for="description">Description:</label>
+      <textarea
+        class="resource-field"
+        id="description"
+        name="description"
+        placeholder="Resource Description"
+        required
+
+      ><%= resource.description.trim() %></textarea
+      ><br />
+      <label class="resource-header" for="resource_url">URL:</label>
+      <input
+        class="resource-field"
+        type="text"
+        id="resource_url"
+        name="url"
+        placeholder="Resource URL"
+        required
+        value="<%= resource.url %>"
+      /><br />
+      <label class="resource-header" for="thumbnail_url">Image URL:</label>
+      <input
+        class="resource-field"
+        type="text"
+        id="thumbnail_url"
+        name="thumbnail_img"
+        placeholder="Image URL"
+        required
+        value="<%= resource.thumbnail %>"
+      /><br />
+      <label class="resource-header" for="category_id"
+        >Choose a Category:</label
+      >
+      <select id="category_id" name="category_id">
+        <option value="1" <% if(resource.category_name == "HTML"){ %>selected <% } %>>HTML</option>
+        <option value="2"<% if(resource.category_name == "CSS"){ %>selected <% } %>>CSS</option>
+        <option value="3" <% if(resource.category_name == "Javascript"){ %>selected <% } %>>Javascript</option>
+        <option value="4" <% if(resource.category_name == "React"){ %>selected <% } %>>React</option>
+        <option value="5" <% if(resource.category_name == "Node"){ %>selected <% } %>>Node</option>
+      </select>
+      <div class="button-area-resource">
+        <button class="edit-resource-button" type="submit">
+          Update Resource
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

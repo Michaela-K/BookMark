@@ -1,0 +1,23 @@
+@use 'variables' as v;
+
+body {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  // font-family: 'Josefin Sans', sans-serif;
+  background: v.$body-background;
+  width: 100%;
+  padding-top: 150px;
+
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}

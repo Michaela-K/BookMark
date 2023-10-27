@@ -1,0 +1,18 @@
+@use 'variables' as v;
+
+.category-title{
+  z-index: 1;
+  display: flex;
+  justify-content:center;
+  background-color: rgb(234, 234, 234);
+  padding: 12px;
+  color: v.$teal;
+  font-size: 2em;
+  margin: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 10px;
+}
+.category-title:hover{
+  color:#d1aa1e;
+}

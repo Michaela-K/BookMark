@@ -1,0 +1,151 @@
+@use 'variables' as v;
+
+.main-nav {
+  background-color: v.$white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 10vh;
+  padding: 3vh 5vh;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+.nav-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  width: 80%;
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 10px;
+  height: 100%;
+}
+
+.nav-link {
+  color: v.$nav-font;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: 0.3s;
+  max-width: 200px;
+  text-align: center;
+}
+
+.nav-link-button {
+  background-color: #4c5265;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 1rem;
+  text-align: center;
+  min-width: 50px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  margin-left: 1vw;
+  margin-top: 3px;
+  transition: background-color 1s;
+  // transition: 0.3s;
+  &:hover {
+    background-color: #015c68;
+  }
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  margin-left: 10px;
+
+  .nav-link{
+    border: none;
+    background: none;
+  }
+
+  &:hover{
+    color: v.$teal;
+    text-underline-position: below;
+
+  }
+}
+.dropdown-options {
+  display: none;
+  position: absolute;
+  overflow: auto;
+}
+.dropdown:hover .dropdown-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+  background-color: v.$white;
+  width: 250px;
+  padding: 20px;
+}
+
+
+.nav-left a:hover {
+  color: v.$green;
+}
+
+.nav-link:hover {
+  color: v.$teal;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 70%;
+}
+.search-form, input{
+  width: 100%;
+  min-width: 50%;
+}
+
+.search-form > input {
+  background-color: v.$link-hover;
+  color: v.$teal;
+  border-radius: 25px 0px 0px 25px;
+  border-style: none;
+  padding: 0px 15px;
+  height: 100%;
+  outline: none;
+}
+
+.search-form > input:autofill, .search-form > input:-webkit-autofill {
+  background-color: v.$link-hover;
+}
+
+#nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: v.$nav-font;
+  color: v.$white;
+  border-radius: 0px 25px 25px 0px;
+  border-style: none;
+  padding: 0px 20px;
+  transition: 0.3s;
+  height: 100%;
+}
+
+#nav-button:hover {
+  cursor: pointer;
+  background-color: v.$teal;
+}
+
+

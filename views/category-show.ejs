@@ -1,0 +1,21 @@
+<%- include('partials/_header.ejs') %>
+
+  <main>
+    <div class="main-container">
+      <section class="resources-main">
+        <% categorydata.forEach(category=> { %>
+          <a href="/resources/<%=category.resource_id%>" class="resource-card-link all <%=category.category_name%>">
+            <div class="resource-card">
+              <div class="card-content">
+                <img src="<%= category.thumbnail_img %>" alt="thumbnail image" class="thumbnail_img" />
+              </div>
+            </div>
+            <div class="resource-card-title">
+              <%= category.title %>
+            </div>
+          </a>
+        <% }); %>
+      </section>
+    </div>
+  </main>
+

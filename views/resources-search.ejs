@@ -1,0 +1,37 @@
+
+<%- include('partials/_header.ejs') %>
+      <main>
+        <h1 class="title-header">Search Results</h1>
+        <section class="resources-main">
+          <% queryResult.forEach(resource=> { %>
+            <a href="/resources/<%= resource.id %>" class="resource-card-link">
+                <div class="resource-card">
+                  <div class="card-content">
+                    <div class="resource-card-title">
+                       <%= resource.title %>
+                    </div>
+                    <img src="<%= resource.thumbnail_img %>" alt="thumbnail image" class="thumbnail_img" />
+                  </div>
+                  <div class="rating-category">
+                      <% if (resource.avg_rating) { %>
+                        <% if (resource.avg_rating==='5' ) { %>
+                          <%- include("../public/docs/5 stars.svg") %>
+                        <% } else if (resource.avg_rating==='4' ) { %>
+                          <%- include("../public/docs/4 stars.svg") %>
+                        <% } else if (resource.avg_rating==='3' ) { %>
+                          <%- include("../public/docs/3 stars.svg") %>
+                        <% } else if (resource.avg_rating==='2' ) { %>
+                            <%- include("../public/docs/2 stars.svg") %>
+                        <% } else if (resource.avg_rating==='1' ) { %>
+                            <%- include("../public/docs/1 star.svg") %>
+                        <% }
+                        } else { %>
+                          <div class="avg-rating">No Ratings</div>
+                    <% } %>
+                  </div>
+                </div>
+            </a>
+          <% }); %>
+        </section>
+      </main>
+

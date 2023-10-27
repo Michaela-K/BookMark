@@ -1,0 +1,125 @@
+<%- include('partials/_header.ejs') %>
+<div class="show-container">
+
+  <div class="title-visit-button">
+      <h1 class="title-header"><%= resource[0].title %></h1>
+      <button class="visit-button">
+        <a target="_blank" href="<%= resource[0].url %>">Visit</a>
+      </button>
+  </div>
+
+  <div class="stars-detail">
+    <% if (resource[0].avg_rating==='5' ) { %>
+      <%- include("../public/docs/5 stars.svg") %>
+        <% } else if (resource[0].avg_rating==='4' ) { %>
+          <%- include("../public/docs/4 stars.svg") %>
+            <% } else if (resource[0].avg_rating==='3' ) { %>
+              <%- include("../public/docs/3 stars.svg") %>
+                <% } else if (resource[0].avg_rating==='2' ) { %>
+                  <%- include("../public/docs/2 stars.svg") %>
+                    <% } else if (resource[0].avg_rating==='1' ) { %>
+                      <%- include("../public/docs/1 star.svg") %>
+                        <% } else { %>
+                          <div class="avg-rating">No Ratings</div>
+                          <% } %>
+    <div class="dot"> . </div>
+    10 ratings
+    <div class="dot"> . </div>
+    <%= resource[0].category_name %>
+  </div>
+
+  <main class="resource-page">
+
+      <div class="left-section">
+        <img src="<%= resource[0].thumbnail %>" alt="Resource Image" />
+        <!-- <p class="resource-category">
+          <%= resource[0].category_name %>
+        </p> -->
+        <!-- <h1 class="resource-title">
+          <%= resource[0].title %>
+        </h1> -->
+
+        <p class="resource-description">
+          <%= resource[0].description %>
+        </p>
+
+          <div class="rating-like-form">
+
+            <form id="ratingForm" class="dropdown-menu" action="/resources/<%= resourceId %>/rating" method="POST">
+
+              <select id="rating-select" name="rating" class="rating">
+                <option value="" disabled selected>Choose Rating</option>
+                <option value="5" class="rating-option">5 ⭐⭐⭐⭐⭐ </option>
+                <option value="4" class="rating-option">4 ⭐⭐⭐⭐</option>
+                <option value="3" class="rating-option">3 ⭐⭐⭐</option>
+                <option value="2" class="rating-option">2 ⭐⭐</option>
+                <option value="1" class="rating-option">1 ⭐</option>
+              </select>
+
+              <button
+                onClick="if(document.querySelector('#rating-select').value.length != 0) return true; else return false"
+                type="submit">Add Rating
+              </button>
+            </form>
+
+            <% if (resource[0].liked ) { %>
+              <form
+                class="likeForm"
+                action="/resources/<%= resource[0].id %>/unlike"
+                method="POST"
+              >
+                <button
+                  type="submit"
+                  class="heart-button"
+                  id="heartButton"
+                >
+                  <i class="fas fa-heart" style="color: <%= resource[0].liked ? 'red' : 'gray' %>"></i>
+                </button>
+              </form>
+              <% } else { %>
+              <form
+              class="likeForm"
+                action="/resources/<%= resource[0].id %>/like"
+                method="POST"
+              >
+                <button
+                  type="submit"
+                  class="heart-button"
+                  id="heartButton"
+                >
+                  <i class="fas fa-heart" style="color: <%= resource[0].liked ? 'red' : 'gray' %>"></i>
+                </button>
+              </form>
+              <% } %>
+          </div>
+      </div>
+
+      <div class="right-section">
+
+        <form id="commentForm" action="/resources/<%= resourceId %>/comment" method="POST">
+          <label for="comment"></label>
+          <textarea id="comment" name="comment" placeholder="Enter your comments here..." required></textarea>
+          <button class="comment-btn" type="submit">Add Comment</button>
+        </form>
+
+
+        <% if (resource[0].comments && resource[0].comments.length> 0 && resource[0].comments[0] !== null) { %>
+          <% for (const obj of resource) { %>
+            <ul class="comments-container">
+              <li class="comment-container">
+                <img src="<%= obj.profile_comment[0] %>" class="user-image" alt="User Image"
+                  style="height: 60px; width: 55px" />
+                <p>
+                  <%= obj.comments[0] %>
+                </p>
+              </li>
+              </br>
+          <% } %>
+        <% } else { %>
+            <li>No Comments Yet !</li>
+          </ul>
+        <% } %>
+      </div>
+
+    </main>
+</div>

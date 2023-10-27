@@ -1,0 +1,73 @@
+@use 'variables' as v;
+
+.title-header {
+  color: v.$green;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-top: 150px;
+  text-align: left;
+}
+
+.edit-resource {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 0;
+}
+
+.edit-resource-container {
+  margin: 0;
+  width: 600px;
+}
+
+.resource-header {
+  color: v.$green;
+  font-size: 18px;
+  margin: 0;
+  padding: 0px 0px 5px 0px;
+}
+
+.resource-info {
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.resource-profile-field{
+  color: v.$green;
+  margin: 0;
+  padding: 5px;
+  outline: none;
+  border-style: none;
+}
+
+.button-area-resource {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  padding-right: 155px;
+}
+
+.edit-resource-button {
+  background-color: v.$nav-font;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: v.$teal;
+  }
+}

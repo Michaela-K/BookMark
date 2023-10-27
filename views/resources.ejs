@@ -1,0 +1,43 @@
+<%- include('partials/_header.ejs') %>
+
+  <main>
+    <div class="main-container">
+      <h1 class="title-header">All Resources</h1>
+      <section class="resources-main">
+        <% resources.forEach(resource=> { %>
+          <a href="/resources/<%= resource.id %>" class="resource-card-link all <%=resource.category_name%>">
+            <div class="resource-card">
+              <!-- <div class="stars">
+                <% if (resource.avg_rating) { %>
+                  <% if (resource.avg_rating==='5' ) { %>
+                    5 <%- include("../public/docs/1 star.svg") %>
+                      <% } else if (resource.avg_rating==='4' ) { %>
+                        4 <%- include("../public/docs/1 star.svg") %>
+                          <% } else if (resource.avg_rating==='3' ) { %>
+                            3 <%- include("../public/docs/1 star.svg") %>
+                              <% } else if (resource.avg_rating==='2' ) { %>
+                                2 <%- include("../public/docs/1 star.svg") %>
+                                  <% } else if (resource.avg_rating==='1' ) { %>
+                                    1 <%- include("../public/docs/1 star.svg") %>
+                                      <% } } else { %>
+                                        <div class="avg-rating">No Ratings</div>
+                                        <% } %>
+              </div> -->
+              <div class="card-content">
+                <img src="<%= resource.thumbnail_img %>" alt="thumbnail image" class="thumbnail_img" />
+              </div>
+
+              <!-- <div class="category">
+                <%= resource.category_name %>
+              </div> -->
+
+            </div>
+            <div class="resource-card-title">
+              <%= resource.title %>
+            </div>
+          </a>
+          <% }); %>
+      </section>
+    </div>
+  </main>
+

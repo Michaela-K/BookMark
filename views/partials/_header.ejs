@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resource Wall</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Raleway&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/resources.css" />
+  <link rel="stylesheet" href="/styles/form.css" />
+  <link rel="stylesheet" href="/styles/user-profile.css" />
+  <link rel="stylesheet" href="/styles/resource-show.css" />
+  <link rel="stylesheet" href="/styles/categories.css" />
+
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script defer src="/scripts/ratings.js"></script>
+  <script src="/scripts/resources.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+  <nav class="main-nav">
+
+    <section class="nav-left">
+      <a href="/resources"><i class="fa fa-home fa-2x" style="color:#ae5555"></i></a>
+      <form class="search-form" method="GET" action="/resources/search?q">
+        <input type="text" placeholder="Search" name="q"/>
+        <button type="submit" id="nav-button">
+          <svg width="20" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+            d="M22.7744 22.7742L30 30M26.3871 14.1935C26.3871 20.9279 20.9279 26.3871 14.1935 26.3871C7.45924 26.3871 2 20.9279 2 14.1935C2 7.45924 7.45924 2 14.1935 2C20.9279 2 26.3871 7.45924 26.3871 14.1935Z"
+            stroke="white" stroke-width="3.48387" stroke-linecap="round" />
+          </svg>
+        </button>
+      </form>
+    </section>
+
+    <section class="nav-right">
+      <% if (!userId) { %>
+        <a href="/log/1" class="nav-link-button" style="margin-left: 10vw;">Sign In</a>
+      <% } else { %>
+        <div class="dropdown">
+          <button class="nav-link">
+            <a href="/resources/categories" class="nav-link">Categories</a>
+          </button>
+        </div>
+        <div class="dropdown">
+          <button class="nav-link">Options</button>
+          <div class="dropdown-options">
+            <a href="/resources/new" class="nav-link">Create</a>
+            <a href="/users/<%= userId %>/my-resources" class="nav-link">My-Resources</a>
+            <a href="/users/<%= userId %>" class="nav-link">Profile</a>
+          </div>
+        </div>
+        <form class="rating" method="POST" action="/log/logout">
+          <button type="submit" class="nav-link-button">Sign Out</button>
+        </form>
+      <% } %>
+    </section>
+
+  </nav>
+  </body>
+
