@@ -30,7 +30,14 @@
                           <div class="avg-rating">No Ratings</div>
                           <% } %>
     <div class="dot"> . </div>
-    10 ratings
+    <%= resource[0].total_comments %>
+
+    <% if (resource[0].total_comments > 1) { %>
+      ratings
+    <% } else { %>
+      rating
+    <% } %>
+    
     <div class="dot"> . </div>
     <%= resource[0].category_name %>
   </div>

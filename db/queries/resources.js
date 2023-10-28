@@ -190,6 +190,7 @@ const getResourceDetails = (id, userId) => {
     users.profile_picture AS profile_picture,
     users.handle AS handle,
     comments.comment_text AS comments,
+    (SELECT COUNT(*) FROM comments WHERE comments.resource_id = resources.id) AS total_comments,
     (SELECT ROUND(AVG(ratings.rating)) FROM ratings WHERE ratings.resource_id = resources.id) as avg_rating,
     ARRAY_AGG(comments.comment_text) AS comments,
     ARRAY_AGG(user_profiles.profile_picture) AS profile_comment,
