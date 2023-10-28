@@ -1,7 +1,7 @@
 
 <%- include('partials/_header.ejs') %>
       <main>
-        <h1 class="title-header">Search Results</h1>
+        <h1 class="title-header">Search results for : <br><br>" <%= query %> "</h1>
         <section class="resources-main">
           <% queryResult.forEach(resource=> { %>
             <a href="/resources/<%= resource.id %>" class="resource-card-link">

@@ -1,9 +1,9 @@
 <%- include('partials/_header.ejs') %>
 
-  <main>
-    <div class="main-container">
-      <h1 class="title-header">Category List</h1>
-      <section class="resources-main">
+  <!-- <main> -->
+    <h1 class="title-header">Category List</h1>
+    <!-- <div class="main-container"> -->
+      <section class="resources-main my-resources">
         <% categories.forEach(category=> { %>
           <a href="/resources/category/<%= category.id %>" class="resource-card-link all <%=category.category_name%>">
             <div class="resource-card">
@@ -12,13 +12,15 @@
               </div>
 
 
-            </div>
-            <div class="category-title">
-              <%= category.category_name %>
+              <div class="resource-card-title-detail">
+                <div class="category-title">
+                  <%= category.category_name %>
+                </div>
+              </div>
             </div>
           </a>
           <% }); %>
       </section>
-    </div>
-  </main>
+    <!-- </div> -->
+  <!-- </main> -->
 

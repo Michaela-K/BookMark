@@ -2,8 +2,9 @@
 
   <main>
     <div class="main-container">
-      <section class="resources-main">
-        <% categorydata.forEach(category=> { %>
+      <h1 class="title-header"><%= categorydata[0].category_name %></h1>
+      <% categorydata.forEach(category=> { %>
+        <section class="resources-main">
           <a href="/resources/<%=category.resource_id%>" class="resource-card-link all <%=category.category_name%>">
             <div class="resource-card">
               <div class="card-content">

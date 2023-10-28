@@ -1,13 +1,13 @@
 @use 'variables' as v;
 
 .category-title{
-  z-index: 1;
+  width: 100%;
   display: flex;
   justify-content:center;
-  background-color: rgb(234, 234, 234);
+  align-items: center;
   padding: 12px;
   color: v.$teal;
-  font-size: 2em;
+  font-size: 1.5em;
   margin: 5px;
   cursor: pointer;
   text-transform: uppercase;

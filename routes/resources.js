@@ -6,8 +6,25 @@ const router = express.Router();
 router.get('/categories', (req, res) => {
   const userId = req.session.user_id;
 
+  const sortArrayOfObjects = (arrOfObjs, key) => {
+    return arrOfObjs.sort((a, b) => {
+      const itemA = a[key].toLowerCase();
+      const itemB = b[key].toLowerCase();
+      if (itemA < itemB) {
+        return -1;
+      }
+      if (itemA > itemB) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
   getAllCategories()
     .then(categories => {
+
+      let result = sortArrayOfObjects(categories, "category_name")
+      console.log("RESULT", result)
 
       const templateVars = {
         categories,
@@ -27,6 +44,7 @@ router.get('/category/:id', (req, res) => {
 
   getAllFromCategories(categoryId)
     .then(categorydata => {
+      console.log(categorydata)
 
       const templateVars = {
         categorydata,
@@ -60,6 +78,7 @@ router.get('/search', (req, res) => {
     .then(queryResult => {
 
       const templateVars = {
+        query,
         queryResult,
         userId
       };
