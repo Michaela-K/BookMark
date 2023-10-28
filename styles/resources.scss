@@ -30,10 +30,12 @@
 }
 .res-card-link, i{
   text-decoration: none;
-  color: v.$white;
+  color: black;
+  padding: 5px 0px;
 }
 
 .resource-card {
+  background-color: v.$white;
   // background-color: aquamarine;
   position: relative;
   margin: 10px;
@@ -52,8 +54,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  padding: 2px 7px;
+  font-size: 16px;
+  // padding: 2px 7px;
   color: v.$teal;
 }
 .dot{
@@ -63,7 +65,7 @@
   align-items: center;
   font-size: 25px;
   height: 100%;
-  margin: 0px 20px;
+  margin: 0px 10px;
 }
 
 .resource-card:hover {

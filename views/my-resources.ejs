@@ -7,35 +7,15 @@
         <a href="/resources/<%= resource.id %>" class="res-card-link all <%=resource.category_name%>">
           <div class="resource-card">
             <div class="card-content">
+              <img src="<%= resource.thumbnail_img %>" alt="thumbnail image" class="thumbnail_img" />
               <div class="resource-card-title-detail">
-                <!-- <i class="fa-regular fa-heart"></i> -->
                 <%= resource.title %>
                 <div class="edit-delete-icons">
                   <a href="/resources/<%= resource.id %>/edit"><i class="fa-regular fa-pen-to-square"></i></a>
                   <a href="/resources/<%= resource.id %>/delete"><i class="fa-regular fa-trash-can"></i></a>
                 </div>
               </div>
-              <img src="<%= resource.thumbnail_img %>" alt="thumbnail image" class="thumbnail_img" />
             </div>
-            <!-- <div class="category">
-              <%= resource.category_name %>
-            </div> -->
-            <!-- <div class="rating-category">
-              <% if (resource.avg_rating) { %>
-                <% if (resource.avg_rating==='5' ) { %>
-                  <%- include("../public/docs/5 stars.svg") %>
-                    <% } else if (resource.avg_rating==='4' ) { %>
-                      <%- include("../public/docs/4 stars.svg") %>
-                        <% } else if (resource.avg_rating==='3' ) { %>
-                          <%- include("../public/docs/3 stars.svg") %>
-                            <% } else if (resource.avg_rating==='2' ) { %>
-                              <%- include("../public/docs/2 stars.svg") %>
-                                <% } else if (resource.avg_rating==='1' ) { %>
-                                  <%- include("../public/docs/1 star.svg") %>
-                                    <% } } else { %>
-                                      <div class="avg-rating">No Ratings</div>
-                                      <% } %>
-            </div> -->
           </div>
         </a>
       </div>

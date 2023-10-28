@@ -188,6 +188,7 @@ const getResourceDetails = (id, userId) => {
     resources.url As url,
     categories.category_name AS category_name,
     users.profile_picture AS profile_picture,
+    users.handle AS handle,
     comments.comment_text AS comments,
     (SELECT ROUND(AVG(ratings.rating)) FROM ratings WHERE ratings.resource_id = resources.id) as avg_rating,
     ARRAY_AGG(comments.comment_text) AS comments,
@@ -204,7 +205,7 @@ const getResourceDetails = (id, userId) => {
       JOIN users ON users.id = comments.user_id
     ) AS user_profiles ON user_profiles.user_id = comments.user_id
     WHERE resources.id = $1
-    GROUP BY resources.id, resources.owner_id, resources.title, resources.description, resources.thumbnail_img, resources.url, categories.category_name, comments.comment_text, users.profile_picture;`,
+    GROUP BY resources.id, resources.owner_id, resources.title, resources.description, resources.thumbnail_img, resources.url, categories.category_name, comments.comment_text, users.profile_picture, users.handle;`,
     values: [id, userId]
   };
   return db.query(queryString)

@@ -8,6 +8,13 @@
       </button>
   </div>
 
+  <div class="owner-data">
+    <img src="<%= resource[0].profile_picture %>" class="user-image" alt="User Image"
+    style="height: 60px; width: 55px" />
+    <div class="separator"> | </div>
+   @<%= resource[0].handle %>
+  </div> <br>
+
   <div class="stars-detail">
     <% if (resource[0].avg_rating==='5' ) { %>
       <%- include("../public/docs/5 stars.svg") %>
