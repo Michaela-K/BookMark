@@ -157,11 +157,9 @@ const searchBarResources = (searchWord) => {
     resources.url AS url,
     categories.category_name AS category_name,
     (SELECT COUNT(comments.id) FROM comments WHERE comments.id IS NOT NULL AND resources.id = comments.resource_id) AS number_of_comments,
-    (SELECT COUNT(likes.id) FROM likes WHERE likes.resource_id = resources.id) AS likes,
-    (SELECT ROUND(AVG(ratings.rating)) FROM ratings WHERE ratings.resource_id = resources.id) as avg_rating
+    (SELECT COUNT(likes.id) FROM likes WHERE likes.resource_id = resources.id) AS likes
     FROM resources
     JOIN categories ON resources.category_id = categories.id
-    JOIN ratings ON ratings.resource_id = resources.id
     LEFT JOIN comments ON comments.resource_id = resources.id
     LEFT JOIN likes ON likes.resource_id = resources.id
     WHERE (resources.title ILIKE $1 OR resources.description ILIKE $1)
@@ -308,3 +306,4 @@ module.exports = {
   getAllCategories,
   getAllFromCategories
 };
+

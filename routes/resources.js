@@ -71,11 +71,12 @@ router.get('/new', (req, res) => {
 
 //resources/search - Search bar
 router.get('/search', (req, res) => {
-  const query = req.query.q;
+  const query = req.query.q.trim();
   const userId = req.session.user_id;
 
   searchBarResources(query)
     .then(queryResult => {
+      // console.log(queryResult)
 
       const templateVars = {
         query,
