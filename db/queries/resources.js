@@ -310,6 +310,19 @@ const decreaseLikes = (userId, resourceId) => {
     });
 };
 
+const deleteResource = (userId, resourceId) => {
+  const queryString = {
+    text: `
+    DELETE FROM resources
+    WHERE owner_id = $1 AND resources.id = $2
+    RETURNING *;`,
+    values: [userId, resourceId]
+  };
+  return db.query(queryString)
+    .then(data => {
+      return data.rows;
+    });
+};
 
 module.exports = {
   getAllResources,
@@ -325,6 +338,7 @@ module.exports = {
   decreaseLikes,
   getAllCategories,
   getAllFromCategories,
-  getAllResourcesAUserLiked
+  getAllResourcesAUserLiked,
+  deleteResource
 };
 

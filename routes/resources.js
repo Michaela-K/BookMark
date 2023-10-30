@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllResources, getResourceDetails, insertNewResource, searchBarResources, updateResource, insertRating, addComment, increaseLikes, decreaseLikes, getAllCategories, getAllFromCategories } = require('../db/queries/resources');
+const { getAllResources, getResourceDetails, insertNewResource, searchBarResources, updateResource, insertRating, addComment, increaseLikes, decreaseLikes, getAllCategories, getAllFromCategories, deleteResource } = require('../db/queries/resources');
 const router = express.Router();
 
 //resources/categories - Show all categories
@@ -213,6 +213,21 @@ router.post('/:id/rating', (req, res) => {
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+});
+
+//resources/:id/delete - Delete a resource
+router.post('/:id/delete', (req, res) => {
+  const userId = req.session.user_id;
+  const resourceId = req.params.id;
+
+  deleteResource(userId, resourceId)
+  .then(result => {
+    res.redirect(`/resources`);
+  })
+  .catch(err => {
+    res.status(500).json({ error: err.message });
+  });
+
 });
 
 // Post to /resources/:id - Edit Resource

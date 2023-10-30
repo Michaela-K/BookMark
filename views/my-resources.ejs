@@ -13,7 +13,11 @@
                 <% if (resource.user_id == userId ) { %>
                   <div class="edit-delete-icons">
                     <a href="/resources/<%= resource.id %>/edit"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a href="/resources/<%= resource.id %>/delete"><i class="fa-regular fa-trash-can"></i></a>
+                    <form class="deleteResource" action="/resources/<%= resource.id %>/delete" method="POST">
+                      <button type="submit" class="delete-button">
+                        <i class="fa-regular fa-trash-can"></i>
+                      </button>
+                    </form>
                   </div>
                 <% } %>
               </div>
@@ -23,6 +27,7 @@
       </div>
     <% }); %>
   </section>
+
 
 
 

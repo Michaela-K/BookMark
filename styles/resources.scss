@@ -112,6 +112,15 @@
   align-items: center;
 }
 
+.edit-delete-icons{
+  display: flex;
+}
+
+.delete-button{
+  border: none;
+  background-color: v.$white;
+}
+
 // .category {
 //   color: v.$white;
 //   background-color: v.$nav-font;
