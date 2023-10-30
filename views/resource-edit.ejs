@@ -3,7 +3,7 @@
   <div class="resource-info">
     <h1 class="title-header">Edit Resource</h1>
 
-    <% if (resource.id === resourceId ) { %>
+    <% if (resource.user_id !== userId ) { %>
     <div class="edit-resource-container"></div>
     <form
       id="resourceEditForm"
