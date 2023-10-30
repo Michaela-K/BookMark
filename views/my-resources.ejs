@@ -2,7 +2,7 @@
 <%- include('partials/_header.ejs') %>
 <h1 class="title-header">My Resources</h1>
   <section class="resources-main my-resources">
-    <% resources.forEach(resource=> { %>
+    <% uniqueResources.forEach(resource=> { %>
       <div class="view-resource">
         <a href="/resources/<%= resource.id %>" class="res-card-link all <%=resource.category_name%>">
           <div class="resource-card">

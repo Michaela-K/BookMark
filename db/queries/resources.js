@@ -105,6 +105,25 @@ const getMyResources = (id) => {
     });
 };
 
+const getAllResourcesAUserLiked = (id) => {
+  const searchString = {
+    text: `
+    SELECT
+    resources.id as id,
+    resources.title as title,
+    resources.thumbnail_img as thumbnail_img
+    FROM likes
+    JOIN resources ON likes.resource_id = resources.id
+    WHERE user_id = $1
+    GROUP BY resources.id, resources.title, resources.thumbnail_img`,
+    values: [id]
+  };
+  return db.query(searchString)
+    .then(data => {
+      return data.rows;
+  });
+}
+
 const insertNewResource = (resource) => {
   const queryString = {
     text: `
@@ -304,6 +323,7 @@ module.exports = {
   increaseLikes,
   decreaseLikes,
   getAllCategories,
-  getAllFromCategories
+  getAllFromCategories,
+  getAllResourcesAUserLiked
 };
 

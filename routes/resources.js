@@ -153,7 +153,7 @@ router.get('/', (req, res) => {
 
 // ----POST-----
 
-// POST - Unlike
+// POST - UNLike
 router.post('/:id/unlike', (req, res) => {
   const userId = req.session.user_id;
   const resourceId = req.params.id;
@@ -169,20 +169,6 @@ router.post('/:id/unlike', (req, res) => {
 });
 
 // POST - Like
-router.post('/:id/unlike', (req, res) => {
-  const userId = req.session.user_id;
-  const resourceId = req.params.id;
-
-  decreaseLikes(userId, resourceId)
-    .then(unlike => {
-      // console.log("UNLIKKE*****", unlike);
-      res.redirect(`/users/${userId}/my-resources`);
-    })
-    .catch(err => {
-      console.log({ error: err.message });
-    });
-});
-
 router.post('/:id/like', (req, res) => {
   const userId = req.session.user_id;
   const resourceId = req.params.id;
