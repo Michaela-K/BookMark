@@ -24,7 +24,7 @@ router.get('/categories', (req, res) => {
     .then(categories => {
 
       let result = sortArrayOfObjects(categories, "category_name")
-      console.log("RESULT", result)
+      // console.log("RESULT", result)
 
       const templateVars = {
         categories,

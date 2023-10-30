@@ -110,12 +110,13 @@ const getAllResourcesAUserLiked = (id) => {
     text: `
     SELECT
     resources.id as id,
+    resources.owner_id as user_id,
     resources.title as title,
     resources.thumbnail_img as thumbnail_img
     FROM likes
     JOIN resources ON likes.resource_id = resources.id
     WHERE user_id = $1
-    GROUP BY resources.id, resources.title, resources.thumbnail_img`,
+    GROUP BY resources.id, resources.owner_id, resources.title, resources.thumbnail_img`,
     values: [id]
   };
   return db.query(searchString)

@@ -24,7 +24,7 @@ router.get('/:id/my-resources', (req, res) => {
           //findIndex -searches for the first occurrence of an el with the same ID as the current el
           //If the two indexes match, the callback function returns true, indicating that the current element should be included in the resulting uniqueResources array.
       );
-
+        console.log(uniqueResources)
       const templateVars = {
         userId,
         uniqueResources

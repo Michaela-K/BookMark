@@ -10,10 +10,12 @@
               <img src="<%= resource.thumbnail_img %>" alt="thumbnail image" class="thumbnail_img" />
               <div class="resource-card-title-detail">
                 <%= resource.title %>
-                <div class="edit-delete-icons">
-                  <a href="/resources/<%= resource.id %>/edit"><i class="fa-regular fa-pen-to-square"></i></a>
-                  <a href="/resources/<%= resource.id %>/delete"><i class="fa-regular fa-trash-can"></i></a>
-                </div>
+                <% if (resource.user_id == userId ) { %>
+                  <div class="edit-delete-icons">
+                    <a href="/resources/<%= resource.id %>/edit"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a href="/resources/<%= resource.id %>/delete"><i class="fa-regular fa-trash-can"></i></a>
+                  </div>
+                <% } %>
               </div>
             </div>
           </div>
