@@ -53,12 +53,9 @@
             Choose a Category
           </option>
           <option value="new" style="color: darkgray;">Create a New Category</option>
-          <option value="1">HTML</option>
-          <option value="2">CSS</option>
-          <option value="3">Javascript</option>
-          <option value="4">React</option>
-          <option value="5">Node</option>
-          <option value="6">PostgreSQL</option>
+          <% categoryData.forEach(category=> { %>
+            <option value="<%=category.category_id%>"><%=category.category_name%></option>
+          <% }); %>
         </select>
         <input
           class="resource-profile-field"

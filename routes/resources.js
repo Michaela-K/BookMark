@@ -61,11 +61,20 @@ router.get('/category/:id', (req, res) => {
 router.get('/new', (req, res) => {
   const userId = req.session.user_id;
 
-  const templateVars = {
-    userId
-  };
+  getAllCategories()
+    .then(categoryData => {
+      console.log(categoryData);
 
-  res.render("resource-new", templateVars);
+    const templateVars = {
+      userId,
+      categoryData
+    };
+
+    res.render("resource-new", templateVars);
+  })
+  .catch(err => {
+    res.status(500).json({ error: err.message });
+  });
 
 });
 
