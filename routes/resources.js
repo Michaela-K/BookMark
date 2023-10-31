@@ -70,7 +70,14 @@ router.get('/new', (req, res) => {
       categoryData
     };
 
+    if(!userId ){
+      res.send(`
+      <h1 style='text-align: center;'>Create A Resource</h1>
+      <h2 style='text-align: center;'>You are not allowed to Create A Resource</h2>
+      `);
+    } else{
     res.render("resource-new", templateVars);
+    }
   })
   .catch(err => {
     res.status(500).json({ error: err.message });
