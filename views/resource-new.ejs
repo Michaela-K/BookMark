@@ -52,12 +52,30 @@
           <option value="" selected disabled hidden class="placeholder">
             Choose a Category
           </option>
+          <option value="new" style="color: darkgray;">Create a New Category</option>
           <option value="1">HTML</option>
           <option value="2">CSS</option>
           <option value="3">Javascript</option>
           <option value="4">React</option>
           <option value="5">Node</option>
+          <option value="6">PostgreSQL</option>
         </select>
+        <input
+          class="resource-profile-field"
+          type="text"
+          id="new_category"
+          name="new_category"
+          placeholder="New Category Name"
+          style="display: none;"
+        /> <br>
+        <input
+          class="resource-profile-field"
+          type="text"
+          id="new_category_img"
+          name="category_img"
+          placeholder="New Category Image URL"
+          style="display: none;"
+        />
         <div class="button-area">
           <button class="resource-button" type="submit">Submit</button>
         </div>
@@ -65,3 +83,4 @@
     </div>
   </div>
 </main>
+

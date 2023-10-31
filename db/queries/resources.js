@@ -49,23 +49,13 @@ const getAllFromCategories = (categoryId) => {
     resources.id as resource_id,
     resources.owner_id as user_id,
     resources.title as title,
-    resources.description as description,
     resources.thumbnail_img as thumbnail_img,
-    resources.url as url,
     categories.id as category_id,
-    categories.category_name as category_name,
-    categories.category_img as category_img,
-    (SELECT COUNT(comments.id) FROM comments WHERE comments.id IS NOT NULL AND resources.id = comments.resource_id) AS number_of_comments,
-    (SELECT COUNT(likes.id) FROM likes WHERE likes.resource_id = resources.id) AS likes,
-    (SELECT ROUND(AVG(ratings.rating)) FROM ratings WHERE ratings.resource_id = resources.id) as avg_rating,
-    EXISTS (SELECT 1 FROM likes WHERE likes.resource_id = resources.id AND likes.user_id =$1) AS liked
+    categories.category_name as category_name
     FROM resources
     JOIN categories ON resources.category_id = categories.id
-    LEFT JOIN comments ON comments.resource_id = resources.id
-    LEFT JOIN likes ON likes.resource_id = resources.id
-    LEFT JOIN ratings ON ratings.resource_id = resources.id
     WHERE categories.id = $1
-    GROUP BY resources.id, resources.owner_id, resources.title, resources.description, resources.thumbnail_img, resources.url, categories.id, categories.category_name, categories.category_img`,
+    GROUP BY resources.id, resources.owner_id, resources.title, resources.thumbnail_img, categories.id, categories.category_name`,
     values: [categoryId]
   };
   return db.query(searchString)
@@ -74,6 +64,17 @@ const getAllFromCategories = (categoryId) => {
     });
 
 }
+
+const insertNewCategory = (categoryName, categoryImg) => {
+  const queryString = {
+    text: `INSERT INTO categories (category_name, category_img) VALUES ($1, $2) RETURNING *;`,
+    values: [categoryName, categoryImg]
+  };
+  return db.query(queryString)
+    .then(data => {
+      return data.rows;
+    });
+};
 
 const getMyResources = (id) => {
   const searchString = {
@@ -339,6 +340,6 @@ module.exports = {
   getAllCategories,
   getAllFromCategories,
   getAllResourcesAUserLiked,
-  deleteResource
+  deleteResource,
+  insertNewCategory
 };
-

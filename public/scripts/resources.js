@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+  //display all in specific category
   const categoryTitle = document.querySelectorAll('.category-title');
   const allCategoryPosts = document.querySelectorAll('.all');
   console.log(allCategoryPosts);
@@ -25,4 +27,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     activeItem.classList.add('active');
   };
+
+
+
+
+  //Display new category input box
+  const categorySelect = document.getElementById('category_id');
+  const newCategoryInput = document.getElementById('new_category');
+  const newCategoryImgInput = document.getElementById('new_category_img');
+
+  categorySelect.addEventListener('change', function () {
+    if (categorySelect.value === 'new') {
+      newCategoryInput.style.display = 'block';
+      newCategoryImgInput.style.display = 'block';
+    } else {
+      newCategoryInput.style.display = 'none';
+      newCategoryImgInput.style.display = 'none';
+    }
+  });
+
+
+
 }, false);
+

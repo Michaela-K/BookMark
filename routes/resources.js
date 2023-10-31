@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllResources, getResourceDetails, insertNewResource, searchBarResources, updateResource, insertRating, addComment, increaseLikes, decreaseLikes, getAllCategories, getAllFromCategories, deleteResource } = require('../db/queries/resources');
+const { getAllResources, getResourceDetails, insertNewResource, searchBarResources, updateResource, insertRating, addComment, increaseLikes, decreaseLikes, getAllCategories, getAllFromCategories, deleteResource, insertNewCategory } = require('../db/queries/resources');
 const router = express.Router();
 
 //resources/categories - Show all categories
@@ -44,7 +44,7 @@ router.get('/category/:id', (req, res) => {
 
   getAllFromCategories(categoryId)
     .then(categorydata => {
-      console.log(categorydata)
+      // console.log('categorydata', categorydata)
 
       const templateVars = {
         categorydata,
@@ -250,13 +250,34 @@ router.post('/', (req, res) => {
   const resource = req.body;
   const userId = req.session.user_id;
 
-  insertNewResource(resource)
+  if (resource.category_id === 'new') {
+    insertNewCategory(resource.new_category, resource.category_img)
+    .then(result => {
+      const newCategoryId = result[0].id;
+      resource.category_id = newCategoryId;
+      // console.log("RESOURCE", resource)
+
+      return insertNewResource(resource);
+    })
     .then(resource => {
       res.redirect(`/users/${userId}/my-resources`);
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+
+  } else {
+
+    insertNewResource(resource)
+    // console.log(resource)
+    .then(resource => {
+      res.redirect(`/users/${userId}/my-resources`);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+
+  }
 });
 
 
