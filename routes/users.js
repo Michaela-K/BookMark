@@ -37,7 +37,7 @@ router.get('/:id/my-resources', (req, res) => {
 
 });
 
-//GET - edit a user page
+//GET - see edit page
 router.get('/:id/edit', (req, res) => {
   const userId = req.params.id;
   getOneUser(userId)
@@ -78,7 +78,15 @@ router.post('/:userId', (req, res) => {
 
   updateUserProfile(userId, user)
     .then(user => {
+
+      if(user.id != userId ){
+        res.send(`
+        <h1 style='text-align: center;'>Edit Profile</h1>
+        <h2 style='text-align: center;'>You are not allowed to edit this profile</h2>
+        `);
+      } else{
       res.redirect(`/users/${userId}`);
+      }
     })
     .catch(err => {
       console.log({ error: err.message });

@@ -63,7 +63,7 @@ router.get('/new', (req, res) => {
 
   getAllCategories()
     .then(categoryData => {
-      console.log(categoryData);
+      // console.log(categoryData);
 
     const templateVars = {
       userId,
@@ -106,13 +106,21 @@ router.get('/:id/edit', (req, res) => {
 
   getResourceDetails(resourceId, userId)
     .then(resource => {
-// console.log(resource[0]);
+      // console.log(resource[0], userId);
       const templateVars = {
         resourceId,
         resource: resource[0],
         userId
       };
-      res.render("resource-edit", templateVars);
+
+      if(resource[0].user_id != userId ){
+        res.send(`
+        <h1 style='text-align: center;'>Edit Resource</h1>
+        <h2 style='text-align: center;'>You are not allowed to edit this resource</h2>
+        `);
+      } else{
+        res.render("resource-edit", templateVars);
+      }
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
