@@ -32,8 +32,7 @@ Users can log in and save their URL's by category and store them in their catalo
 <!-- ABOUT THE PROJECT -->
 ## About the Project <a id="about"></a>
 
-INSERT IMAGE OR VIDEO HERE
-
+![BookMark Demo](public/BookMark-Demo.gif)
 
 ### Built With 
 
