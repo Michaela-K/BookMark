@@ -90,8 +90,10 @@ INSERT IMAGE OR VIDEO HERE
 ## Features <a id="features"></a>
 - [ ] Host project (Work in Progress)
 - [x] Log in to view navbar options
+- [x] Search through resources
 - [x] Create a new bookmark/resource
 - [x] Create a new category
+- [x] View all categories
 - [x] On the My-Resources page, view resources created and resources liked
 - [x] View and edit user profile
 - [x] View, edit or delete a resource

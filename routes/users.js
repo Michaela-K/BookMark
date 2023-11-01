@@ -74,24 +74,24 @@ router.get('/:id', (req, res) => {
 // POST - update user profile
 router.post('/:userId', (req, res) => {
   const userId = req.params.userId;
-  const user = req.body;
+  const currentUserId = req.session.user_id;
+  const body = req.body;
 
-  updateUserProfile(userId, user)
-    .then(user => {
-
-      if(user.id != userId ){
-        res.send(`
-        <h1 style='text-align: center;'>Edit Profile</h1>
-        <h2 style='text-align: center;'>You are not allowed to edit this profile</h2>
-        `);
-      } else{
-      res.redirect(`/users/${userId}`);
-      }
-    })
-    .catch(err => {
-      console.log({ error: err.message });
-    });
-
+  if (userId !== currentUserId) {
+    res.send(`
+      <h1 style='text-align: center;'>Edit Profile</h1>
+      <h2 style='text-align: center;'>You are not allowed to edit this profile</h2>
+    `);
+  } else {
+    updateUserProfile(userId, body)
+      .then(updatedUser => {
+        res.redirect(`/users/${userId}`);
+      })
+      .catch(err => {
+         console.error({ error: err.message });
+         res.status(500).send('An error occurred while updating the profile');
+      });
+  }
 });
 
 module.exports = router;
