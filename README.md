@@ -88,7 +88,6 @@ Users can log in and save their URL's by category and store them in their catalo
 
 ## Features <a id="features"></a>
 - [ ] Host project (Work in Progress)
-- [x] Log in to view navbar options
 - [x] Search through resources
 - [x] Create a new bookmark/resource
 - [x] Create a new category
@@ -98,5 +97,8 @@ Users can log in and save their URL's by category and store them in their catalo
 - [x] View, edit or delete a resource
 - [x] Rate, Comment or Like a resource
 - [ ] Responsiveness to be improved
+- [ ] Prevent duplicate categories
+- [ ] Edit a category
+- [ ] Delete a category
 
 <p align="right"><a href="#readme-top">back to top</a></p>
