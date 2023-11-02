@@ -190,6 +190,12 @@ router.post('/:id/like', (req, res) => {
   const userId = req.session.user_id;
   const resourceId = req.params.id;
 
+  if (!userId){
+    res.send(`
+      <h1 style='text-align: center;'>Like A Resource</h1>
+      <h2 style='text-align: center;'>Please Log In !</h2>
+      `);
+  }else{
   increaseLikes(userId, resourceId)
     .then(like => {
       res.redirect(`/users/${userId}/my-resources`);
@@ -197,6 +203,7 @@ router.post('/:id/like', (req, res) => {
     .catch(err => {
       console.log({ error: err.message });
     });
+  }
 });
 
 // Post to /resources/:id/comment
@@ -221,13 +228,20 @@ router.post('/:id/rating', (req, res) => {
   const resourceId = req.params.id;
   const rating = req.body.rating;
 
-  insertRating(userId, resourceId, rating)
-    .then(rating => {
-      res.redirect(`/resources/${resourceId}`);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  if (!userId){
+    res.send(`
+      <h1 style='text-align: center;'>Rate A Resource</h1>
+      <h2 style='text-align: center;'>Please Log In to Add a Rating</h2>
+      `);
+  }else{
+    insertRating(userId, resourceId, rating)
+      .then(rating => {
+        res.redirect(`/resources/${resourceId}`);
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
+      });
+  }
 });
 
 //resources/:id/delete - Delete a resource
