@@ -24,7 +24,6 @@ router.get('/categories', (req, res) => {
     .then(categories => {
 
       let result = sortArrayOfObjects(categories, "category_name")
-      // console.log("RESULT", result)
 
       const templateVars = {
         categories,
@@ -44,7 +43,6 @@ router.get('/category/:id', (req, res) => {
 
   getAllFromCategories(categoryId)
     .then(categorydata => {
-      // console.log('categorydata', categorydata)
 
       const templateVars = {
         categorydata,
@@ -63,7 +61,6 @@ router.get('/new', (req, res) => {
 
   getAllCategories()
     .then(categoryData => {
-      // console.log(categoryData);
 
     const templateVars = {
       userId,
@@ -92,7 +89,6 @@ router.get('/search', (req, res) => {
 
   searchBarResources(query)
     .then(queryResult => {
-      // console.log(queryResult)
 
       const templateVars = {
         query,
@@ -113,7 +109,6 @@ router.get('/:id/edit', (req, res) => {
 
   getResourceDetails(resourceId, userId)
     .then(resource => {
-      // console.log(resource[0], userId);
       const templateVars = {
         resourceId,
         resource: resource[0],
@@ -142,7 +137,6 @@ router.get('/:id', (req, res) => {
 
   getResourceDetails(resourceId, userId)
     .then(resource => {
-      // console.log(resource)
       const templateVars = {
         resource,
         userId,
@@ -184,7 +178,6 @@ router.post('/:id/unlike', (req, res) => {
 
   decreaseLikes(userId, resourceId)
     .then(unlike => {
-      // console.log("UNLIKKE*****", unlike);
       res.redirect(`/users/${userId}/my-resources`);
     })
     .catch(err => {
@@ -199,7 +192,6 @@ router.post('/:id/like', (req, res) => {
 
   increaseLikes(userId, resourceId)
     .then(like => {
-      // console.log("LIKKE*****", like);
       res.redirect(`/users/${userId}/my-resources`);
     })
     .catch(err => {
@@ -212,7 +204,6 @@ router.post('/:id/comment', (req, res) => {
   const resourceId = req.params.id;
   const commentText = req.body.comment;
   const userId = req.session.user_id;
-  // console.log(commentText);
 
   addComment(userId, commentText, resourceId)
     .then(resource => {
@@ -279,7 +270,6 @@ router.post('/', (req, res) => {
     .then(result => {
       const newCategoryId = result[0].id;
       resource.category_id = newCategoryId;
-      // console.log("RESOURCE", resource)
 
       return insertNewResource(resource);
     })
@@ -293,7 +283,6 @@ router.post('/', (req, res) => {
   } else {
 
     insertNewResource(resource)
-    // console.log(resource)
     .then(resource => {
       res.redirect(`/users/${userId}/my-resources`);
     })

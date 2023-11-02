@@ -278,7 +278,6 @@ const addComment = (userId, commentText, resourceId) => {
   };
   return db.query(queryString)
     .then(data => {
-      // console.log(data);
       const row = data.rows[data.rows.length - 1];
       return data.rows;
     });
