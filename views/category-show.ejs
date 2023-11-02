@@ -1,22 +1,26 @@
 <%- include('partials/_header.ejs') %>
 
-  <main>
-    <div class="main-container">
+<main>
+  <% if (!categorydata || categorydata.length === 0) { %>
+      <h1 >No Resources Yet!</h1>
+  <% } else { %>
       <h1 class="title-header"><%= categorydata[0].category_name %></h1>
-      <% categorydata.forEach(category=> { %>
-        <section class="resources-main">
-          <a href="/resources/<%=category.resource_id%>" class="resource-card-link all <%=category.category_name%>">
-            <div class="resource-card">
-              <div class="card-content">
-                <img src="<%= category.thumbnail_img %>" alt="thumbnail image" class="thumbnail_img" />
-              </div>
-            </div>
-            <div class="resource-card-title">
-              <%= category.title %>
-            </div>
-          </a>
-        <% }); %>
-      </section>
+  <div class="main-container">
+          <% categorydata.forEach(category=> { %>
+            <section class="resources-main">
+              <a href="/resources/<%=category.resource_id%>" class="resource-card-link all <%=category.category_name%>">
+                <div class="resource-card">
+                  <div class="card-content">
+                    <img src="<%= category.thumbnail_img %>" alt="thumbnail image" class="thumbnail_img" />
+                  </div>
+                </div>
+                <div class="resource-card-title">
+                  <%= category.title %>
+                </div>
+              </a>
+            </section>
+          <% }); %>
+      <% }; %>
     </div>
-  </main>
+</main>
 

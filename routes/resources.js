@@ -3,7 +3,7 @@ const { getAllResources, getResourceDetails, insertNewResource, searchBarResourc
 const { getOneUser } = require('../db/queries/users');
 const router = express.Router();
 
-//resources/categories - Show all categories
+//resources/categories - Show list of all categories
 router.get('/categories', (req, res) => {
   const userId = req.session.user_id;
 
@@ -37,7 +37,7 @@ router.get('/categories', (req, res) => {
     });
 });
 
-//resources/category/:id - Show all categories
+//resources/category/:id - List all resources in that category
 router.get('/category/:id', (req, res) => {
   const userId = req.session.user_id;
   const categoryId = req.params.id;
@@ -179,7 +179,7 @@ router.post('/:id/unlike', (req, res) => {
 
   getOneUser(userId)
   .then(user =>{
-    if (!userId || userId !== user.id){
+    if (!userId || userId != user.id){
       res.send(`
         <h1 style='text-align: center;'>Like A Resource</h1>
         <h2 style='text-align: center;'>Please Log In !</h2>
@@ -206,7 +206,7 @@ router.post('/:id/like', (req, res) => {
 
   getOneUser(userId)
   .then(user =>{
-    if (!userId || userId !== user.id){
+    if (!userId || userId != user.id){
       res.send(`
         <h1 style='text-align: center;'>Like A Resource</h1>
         <h2 style='text-align: center;'>Please Log In !</h2>
@@ -257,7 +257,7 @@ router.post('/:id/rating', (req, res) => {
 
   getOneUser(userId)
   .then(user =>{
-    if (!userId || userId !== user.id){
+    if (!userId || userId != user.id){
       res.send(`
       <h1 style='text-align: center;'>Rate A Resource</h1>
       <h2 style='text-align: center;'>Please Log In to Add a Rating</h2>
