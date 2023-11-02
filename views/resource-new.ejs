@@ -54,9 +54,10 @@
           </option>
           <option value="new" style="color: darkgray;">Create a New Category</option>
           <% categoryData.forEach(category=> { %>
-            <option value="<%=category.category_id%>"><%=category.category_name%></option>
+          <option value=<%= category.id %>><%=category.category_name%></option>
           <% }); %>
         </select>
+
         <input
           class="resource-profile-field"
           type="text"
@@ -73,6 +74,7 @@
           placeholder="New Category Image URL"
           style="display: none;"
         />
+
         <div class="button-area">
           <button class="resource-button" type="submit">Submit</button>
         </div>

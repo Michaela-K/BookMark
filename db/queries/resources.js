@@ -132,7 +132,7 @@ const insertNewResource = (resource) => {
     INSERT INTO resources (owner_id, url, thumbnail_img, title, description, category_id)
     VALUES($1, $2, $3, $4, $5, $6)
     RETURNING *;`,
-    values: [resource.owner_id, resource.url, resource.thumbnail_img, resource.title, resource.description.trim(), resource.category_id]
+    values: [resource.owner_id, resource.url, resource.thumbnail_img, resource.title, resource.description, resource.category_id]
   };
   return db.query(queryString)
     .then(data => {

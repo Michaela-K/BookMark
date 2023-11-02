@@ -1,5 +1,6 @@
 const express = require('express');
 const { getAllResources, getResourceDetails, insertNewResource, searchBarResources, updateResource, insertRating, addComment, increaseLikes, decreaseLikes, getAllCategories, getAllFromCategories, deleteResource, insertNewCategory } = require('../db/queries/resources');
+const { getOneUser } = require('../db/queries/users');
 const router = express.Router();
 
 //resources/categories - Show all categories
@@ -176,13 +177,26 @@ router.post('/:id/unlike', (req, res) => {
   const userId = req.session.user_id;
   const resourceId = req.params.id;
 
-  decreaseLikes(userId, resourceId)
-    .then(unlike => {
-      res.redirect(`/users/${userId}/my-resources`);
-    })
-    .catch(err => {
-      console.log({ error: err.message });
-    });
+  getOneUser(userId)
+  .then(user =>{
+    if (!userId || userId !== user.id){
+      res.send(`
+        <h1 style='text-align: center;'>Like A Resource</h1>
+        <h2 style='text-align: center;'>Please Log In !</h2>
+        `);
+    }else{
+      decreaseLikes(userId, resourceId)
+        .then(unlike => {
+          res.redirect(`/users/${userId}/my-resources`);
+        })
+        .catch(err => {
+          console.log({ error: err.message });
+        });
+    }
+  })
+  .catch(err => {
+    console.log({ error: err.message });
+   })
 });
 
 // POST - Like
@@ -190,20 +204,26 @@ router.post('/:id/like', (req, res) => {
   const userId = req.session.user_id;
   const resourceId = req.params.id;
 
-  if (!userId){
-    res.send(`
-      <h1 style='text-align: center;'>Like A Resource</h1>
-      <h2 style='text-align: center;'>Please Log In !</h2>
-      `);
-  }else{
-  increaseLikes(userId, resourceId)
-    .then(like => {
-      res.redirect(`/users/${userId}/my-resources`);
-    })
-    .catch(err => {
-      console.log({ error: err.message });
-    });
-  }
+  getOneUser(userId)
+  .then(user =>{
+    if (!userId || userId !== user.id){
+      res.send(`
+        <h1 style='text-align: center;'>Like A Resource</h1>
+        <h2 style='text-align: center;'>Please Log In !</h2>
+        `);
+    }else{
+    increaseLikes(userId, resourceId)
+      .then(like => {
+        res.redirect(`/users/${userId}/my-resources`);
+      })
+      .catch(err => {
+        console.log({ error: err.message });
+      });
+    }
+  })
+  .catch(err => {
+    console.log({ error: err.message });
+  });
 });
 
 // Post to /resources/:id/comment
@@ -212,6 +232,12 @@ router.post('/:id/comment', (req, res) => {
   const commentText = req.body.comment;
   const userId = req.session.user_id;
 
+  if (!userId){
+    res.send(`
+      <h1 style='text-align: center;'>Comment on a Resource</h1>
+      <h2 style='text-align: center;'>Please Log In to Comment !</h2>
+      `);
+  }else{
   addComment(userId, commentText, resourceId)
     .then(resource => {
       res.redirect(`/resources/${resourceId}`);
@@ -219,6 +245,7 @@ router.post('/:id/comment', (req, res) => {
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+  }
 });
 
 //resources/:id/rating - Edit rating
@@ -228,8 +255,10 @@ router.post('/:id/rating', (req, res) => {
   const resourceId = req.params.id;
   const rating = req.body.rating;
 
-  if (!userId){
-    res.send(`
+  getOneUser(userId)
+  .then(user =>{
+    if (!userId || userId !== user.id){
+      res.send(`
       <h1 style='text-align: center;'>Rate A Resource</h1>
       <h2 style='text-align: center;'>Please Log In to Add a Rating</h2>
       `);
@@ -242,6 +271,10 @@ router.post('/:id/rating', (req, res) => {
         res.status(500).json({ error: err.message });
       });
   }
+  })
+  .catch(err => {
+    res.status(500).json({ error: err.message });
+  });
 });
 
 //resources/:id/delete - Delete a resource
@@ -249,9 +282,22 @@ router.post('/:id/delete', (req, res) => {
   const userId = req.session.user_id;
   const resourceId = req.params.id;
 
-  deleteResource(userId, resourceId)
-  .then(result => {
-    res.redirect(`/resources`);
+  getOneUser(userId)
+  .then(user =>{
+    if (!userId || userId != user.id){
+      res.send(`
+      <h1 style='text-align: center;'>Delete A Resource</h1>
+      <h2 style='text-align: center;'>Please Log In !</h2>
+      `);
+    }else{
+      deleteResource(userId, resourceId)
+      .then(result => {
+        res.redirect(`/resources`);
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
+      });
+    }
   })
   .catch(err => {
     res.status(500).json({ error: err.message });
@@ -265,13 +311,26 @@ router.post('/:id', (req, res) => {
   const resourceToUpdate = req.body;
   const userId = req.session.user_id;
 
-  updateResource(resourceId, resourceToUpdate)
+  getOneUser(userId)
+  .then(user =>{
+    if (!userId || userId != user.id){
+      res.send(`
+      <h1 style='text-align: center;'>Edit A Resource</h1>
+      <h2 style='text-align: center;'>Please Log In !</h2>
+      `);
+    }else{
+      updateResource(resourceId, resourceToUpdate)
     .then(resource => {
       res.redirect(`/resources/${resourceId}`);
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
+    }
+  })
+  .catch(err => {
+    res.status(500).json({ error: err.message });
+  });
 });
 
 // Post to /resources - Add New Resource
@@ -279,32 +338,47 @@ router.post('/', (req, res) => {
   const resource = req.body;
   const userId = req.session.user_id;
 
-  if (resource.category_id === 'new') {
-    insertNewCategory(resource.new_category, resource.category_img)
-    .then(result => {
-      const newCategoryId = result[0].id;
-      resource.category_id = newCategoryId;
 
-      return insertNewResource(resource);
-    })
-    .then(resource => {
-      res.redirect(`/users/${userId}/my-resources`);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  getOneUser(userId)
+  .then(user =>{
+    if (!userId || userId != user.id){
+      res.send(`
+      <h1 style='text-align: center;'>Create A Resource</h1>
+      <h2 style='text-align: center;'>Please Log In !</h2>
+      `);
+    }else{
 
-  } else {
+      if (resource.category_id === 'new') {
+        insertNewCategory(resource.new_category, resource.category_img)
+        .then(result => {
+          const newCategoryId = result[0].id;
+          resource.category_id = newCategoryId;
 
-    insertNewResource(resource)
-    .then(resource => {
-      res.redirect(`/users/${userId}/my-resources`);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+          return insertNewResource(resource);
+        })
+        .then(resource => {
+          res.redirect(`/users/${userId}/my-resources`);
+        })
+        .catch(err => {
+          res.status(500).json({ error: err.message });
+        });
+      } else {
+        console.log(resource)
+        insertNewResource(resource)
+        .then(resource => {
+          console.log("INSIDE", resource)
+          res.redirect(`/users/${userId}/my-resources`);
+        })
+        .catch(err => {
+          res.status(500).json({ error: err.message });
+        });
+      }
+    }
 
-  }
+  })
+  .catch(err => {
+    res.status(500).json({ error: err.message });
+  });
 });
 
 
