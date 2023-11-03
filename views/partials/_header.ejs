@@ -37,7 +37,7 @@
   <nav class="main-nav">
 
     <section class="nav-left">
-      <a href="/resources"><i class="fa fa-home fa-2x" style="margin-right: 1vw;"></i></a>
+      <a href="/resources"><i class="fa fa-home fa-2x" style="margin-right: 1vw; color: brown;"></i></a>
       <form class="search-form" method="GET" action="/resources/search?q">
         <input type="text" placeholder="Search" name="q"/>
         <button type="submit" id="nav-button">
@@ -55,8 +55,8 @@
         <% if (!userId) { %>
           <a href="/log/1" class="nav-link-button" style="margin-left: 10vw;">Sign In</a>
         <% } else { %>
+          <a href="/resources/new" class="nav-link">Create</a>
             <a href="/resources/categories" class="nav-link">Categories</a>
-            <a href="/resources/new" class="nav-link">Create</a>
             <a href="/users/<%= userId %>/my-resources" class="nav-link">My-Resources</a>
             <a href="/users/<%= userId %>" class="nav-link">Profile</a>
           <form class="rating" method="POST" action="/log/logout">
