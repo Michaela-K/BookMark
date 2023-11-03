@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
   //display all in specific category
   const categoryTitle = document.querySelectorAll('.category-title');
   const allCategoryPosts = document.querySelectorAll('.all');
-  console.log(allCategoryPosts);
+  // console.log(allCategoryPosts);
   for (let i = 0; i < categoryTitle.length; i++) {
     console.log(categoryTitle[i]);
     categoryTitle[i].addEventListener('click', filterPosts.bind(this, categoryTitle[i]));
   }
 
   function filterPosts(item) {
-    console.log(item);
+    // console.log(item);
     changeActivePosition(item);
     for (let i = 0; i < allCategoryPosts.length; i++) {
       if (allCategoryPosts[i].classList.contains(item.attributes.id.value)) {
@@ -47,6 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-
 }, false);
+
 

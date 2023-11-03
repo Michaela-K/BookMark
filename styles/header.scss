@@ -3,7 +3,7 @@
 .main-nav {
   background-color: v.$white;
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -19,25 +19,31 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 10px;
+  // gap: 10px;
   height: 100%;
-  width: 80%;
+  width: 60vw;
 }
 
 .nav-right {
+  width: 40vw;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
   margin-left: 10px;
-  height: 100%;
+  font-size: 1em;
+  // height: 100%;
+
+  a{
+    margin: 0px 20px;
+  }
 }
 
 .nav-link {
   color: v.$nav-font;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-decoration: none;
   transition: 0.3s;
   max-width: 200px;
@@ -142,9 +148,69 @@
   height: 100%;
 }
 
-#nav-button:hover {
-  cursor: pointer;
-  background-color: v.$teal;
+
+//NAV BAR
+@media screen and (min-width: 1250px) {
+  .main-nav {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+.main-nav .nav-left {
+  align-self: flex-start;
 }
 
+.main-nav .nav-right {
+  display: none;
+  position: relative; /* to prevent content pushing down*/
+  list-style: none;
+}
+@media screen and (min-width: 1250px) {
+  .main-nav .nav-right {
+    display: flex;
+  }
+}
+@media screen and (max-width: 1660px) {
+  .main-nav .nav-right {
+    width: 25vw;
+  }
+  .main-nav .nav-right {
+    width: 75vw;
+  }
+}
 
+.main-nav #hamburger {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 30px;
+  margin-left: 40px;
+}
+
+@media screen and (min-width: 1250px) {
+  .main-nav #hamburger {
+    display: none;
+  }
+}
+.nav-right.active {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 90%;
+  height: 30vh;
+
+  a{
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+
+  button{
+    width: 30vw;
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+  }
+
+}
